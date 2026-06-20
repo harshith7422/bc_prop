@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, MapPin, Calculator, PhoneCall, Mail, User, Shield, CheckCircle, Sparkles, TrendingUp } from 'lucide-react';
 
-export default function PropertyModal({ property, onClose, isFavorite, onToggleFavorite }) {
+export default function PropertyModal({ property, onClose }) {
   // Lead form states
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: `Hi, I am interested in "${property.title}" listed for ${property.price}. Please share more details.` });

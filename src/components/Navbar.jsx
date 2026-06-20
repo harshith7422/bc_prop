@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Home, Building2, BookOpen, Mail, Heart } from 'lucide-react';
+import { Menu, X, Home, Building2, BookOpen, Mail } from 'lucide-react';
 
-export default function Navbar({ activePage, setActivePage, favoritesCount, onOpenFavorites }) {
+export default function Navbar({ activePage, setActivePage }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -36,11 +36,7 @@ export default function Navbar({ activePage, setActivePage, favoritesCount, onOp
         {/* LOGO */}
         <div className="navbar-logo" onClick={() => handleLinkClick('home')}>
           <div className="logo-icon">
-            <svg viewBox="0 0 100 100" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M50 12L15 42H28V85H72V42H85L50 12Z" stroke="#0F52BA" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M38 52C42 48 48 48 52 52L62 62C66 66 72 66 75 62" stroke="#00A8E8" strokeWidth="6" strokeLinecap="round" />
-              <circle cx="50" cy="70" r="6" fill="#0F52BA" />
-            </svg>
+            <img src="/logo.png" alt="BlueCraft Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
           </div>
           <div className="logo-text">
             <span className="brand-blue">BlueCraft</span>
@@ -64,19 +60,10 @@ export default function Navbar({ activePage, setActivePage, favoritesCount, onOp
             );
           })}
 
-          {/* Favorites Badge */}
-          <button className="nav-favorites-btn" onClick={onOpenFavorites} aria-label="View Favorites">
-            <Heart size={20} className={favoritesCount > 0 ? 'fill-red text-red animate-pulse-like' : ''} />
-            {favoritesCount > 0 && <span className="favorites-badge">{favoritesCount}</span>}
-          </button>
         </div>
 
         {/* MOBILE MENU TOGGLE */}
         <div className="mobile-toggle">
-          <button className="nav-favorites-btn mr-2" onClick={onOpenFavorites} aria-label="View Favorites">
-            <Heart size={20} className={favoritesCount > 0 ? 'fill-red text-red' : ''} />
-            {favoritesCount > 0 && <span className="favorites-badge">{favoritesCount}</span>}
-          </button>
           <button className="btn-menu" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle navigation">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -113,17 +100,25 @@ export default function Navbar({ activePage, setActivePage, favoritesCount, onOp
           right: 0;
           height: 80px;
           z-index: 1000;
-          background-color: rgba(255, 255, 255, 0.9);
+          background-color: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           border-bottom: 1px solid var(--border-color);
-          transition: all 0.3s ease;
+          transition: height 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         .navbar-scrolled {
           height: 70px;
           box-shadow: var(--shadow-md);
-          background-color: rgba(255, 255, 255, 0.95);
+          background-color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+          .navbar {
+            background-color: #ffffff;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+          }
         }
 
         .navbar-container {
@@ -138,7 +133,7 @@ export default function Navbar({ activePage, setActivePage, favoritesCount, onOp
 
         @media (max-width: 768px) {
           .navbar-container {
-            padding: 0 1rem;
+            padding: 0 1.25rem;
           }
         }
 
@@ -206,51 +201,6 @@ export default function Navbar({ activePage, setActivePage, favoritesCount, onOp
           background-color: var(--primary);
         }
 
-        .nav-favorites-btn {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0.5rem;
-          border-radius: 50%;
-          transition: all 0.2s ease;
-          color: var(--text-dark);
-        }
-
-        .nav-favorites-btn:hover {
-          background-color: rgba(0, 0, 0, 0.05);
-          color: #EF4444;
-        }
-
-        .favorites-badge {
-          position: absolute;
-          top: -2px;
-          right: -2px;
-          background-color: #EF4444;
-          color: white;
-          font-size: 0.7rem;
-          font-weight: 700;
-          min-width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border: 2px solid white;
-        }
-
-        .fill-red {
-          fill: #EF4444;
-        }
-
-        .text-red {
-          color: #EF4444;
-        }
-
-        .animate-pulse-like {
-          animation: pulse-subtle 1.5s infinite;
-        }
-
         .mobile-toggle {
           display: none;
           align-items: center;
@@ -265,7 +215,17 @@ export default function Navbar({ activePage, setActivePage, favoritesCount, onOp
 
         .btn-menu {
           color: var(--text-dark);
-          padding: 0.25rem;
+          padding: 0.5rem;
+          background: #f1f5f9;
+          border-radius: var(--radius-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s;
+        }
+
+        .btn-menu:hover {
+          background: #e2e8f0;
         }
 
         .mobile-drawer {
@@ -274,10 +234,11 @@ export default function Navbar({ activePage, setActivePage, favoritesCount, onOp
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: rgba(255, 255, 255, 0.98);
-          backdrop-filter: blur(12px);
+          background-color: #ffffff;
           z-index: 999;
           border-top: 1px solid var(--border-color);
+          overflow-y: auto;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-scrolled + .mobile-drawer {
@@ -287,34 +248,34 @@ export default function Navbar({ activePage, setActivePage, favoritesCount, onOp
         .drawer-content {
           display: flex;
           flex-direction: column;
-          padding: 2rem 1rem;
+          padding: 2rem 1.5rem;
           gap: 1rem;
         }
 
         .drawer-item {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
-          padding: 1rem;
+          gap: 1rem;
+          padding: 1.25rem 1.5rem;
           border-radius: var(--radius-md);
           font-size: 1.1rem;
           font-weight: 600;
           color: var(--text-dark);
           text-align: left;
+          background-color: #f8fafc;
+          border: 1px solid transparent;
+          transition: all 0.2s ease;
         }
 
         .drawer-item:hover {
-          background-color: var(--primary-light);
-          color: var(--primary);
+          background-color: #f1f5f9;
+          border-color: #e2e8f0;
         }
 
         .drawer-item.active {
           color: white;
           background-color: var(--primary);
-        }
-
-        .mr-2 {
-          margin-right: 0.5rem;
+          box-shadow: var(--shadow-sm);
         }
       `}</style>
     </nav>

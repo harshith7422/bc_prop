@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, MapPin, Building, ShieldCheck, Sparkles, Star, Users, Quote } from 'lucide-react';
+import { Search, MapPin, Building, ShieldCheck, Sparkles, Star, Users, Quote, Map } from 'lucide-react';
 
 const testimonialsData = [
   {
@@ -126,7 +126,7 @@ export default function Home({ setActivePage, setGlobalSearch }) {
             <p className="section-subtitle">We provide comprehensive, high-end real estate solutions.</p>
           </div>
 
-          <div className="services-grid grid-3">
+          <div className="services-grid grid-4">
             {/* Flat card */}
             <div className="service-card glass-panel">
               <div className="service-icon-box bg-blue">
@@ -160,6 +160,18 @@ export default function Home({ setActivePage, setGlobalSearch }) {
               <p className="service-card-desc">Invest in grade-A commercial complexes, retail units, and office spaces with prime layout exposures.</p>
               <button className="service-btn" onClick={() => handleServiceClick('Commercial')}>
                 <span>BUY NOW</span>
+              </button>
+            </div>
+
+            {/* Plot card */}
+            <div className="service-card glass-panel">
+              <div className="service-icon-box bg-purple">
+                <Map size={28} className="text-purple" />
+              </div>
+              <h3 className="service-card-title">Buy a Plot</h3>
+              <p className="service-card-desc">Secure premium plotted developments in high-growth corridors for custom homes or secure investment.</p>
+              <button className="service-btn" onClick={() => handleServiceClick('Plots')}>
+                <span>EXPLORE PLOTS</span>
               </button>
             </div>
           </div>
@@ -480,9 +492,11 @@ export default function Home({ setActivePage, setGlobalSearch }) {
         .bg-blue { background-color: var(--primary-light); }
         .bg-green { background-color: #DEF7EC; }
         .bg-amber { background-color: #FEF3C7; }
+        .bg-purple { background-color: #F3E8FF; }
 
         .text-green { color: #10B981; }
         .text-amber { color: #F59E0B; }
+        .text-purple { color: #9333EA; }
 
         .service-card-title {
           font-size: 1.4rem;

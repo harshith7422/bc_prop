@@ -1,17 +1,12 @@
 import React from 'react';
-import { Heart, MapPin, BedDouble, Expand, ArrowRight } from 'lucide-react';
+import { MapPin, BedDouble, Expand, ArrowRight } from 'lucide-react';
 
-export default function PropertyCard({ property, onSelect, isFavorite, onToggleFavorite }) {
+export default function PropertyCard({ property, onSelect }) {
   // Determine badge type
   const getBadgeClass = (status) => {
     if (status.toLowerCase().includes('ready')) return 'badge-ready';
     if (status.toLowerCase().includes('construction')) return 'badge-construction';
     return 'badge-plots';
-  };
-
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation();
-    onToggleFavorite(property.id);
   };
 
   return (
@@ -21,13 +16,6 @@ export default function PropertyCard({ property, onSelect, isFavorite, onToggleF
         <span className={`badge property-badge ${getBadgeClass(property.status)}`}>
           {property.status}
         </span>
-        <button
-          className={`property-fav-btn ${isFavorite ? 'active' : ''}`}
-          onClick={handleFavoriteClick}
-          aria-label="Add to favorites"
-        >
-          <Heart size={18} fill={isFavorite ? '#EF4444' : 'none'} stroke={isFavorite ? '#EF4444' : 'white'} />
-        </button>
       </div>
 
       <div className="property-card-content">

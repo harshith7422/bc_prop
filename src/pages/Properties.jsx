@@ -5,7 +5,7 @@ import PropertyModal from '../components/PropertyModal';
 import MockMap from '../components/MockMap';
 import { propertiesData } from '../data/properties';
 
-export default function Properties({ globalSearch, setGlobalSearch, favorites, onToggleFavorite }) {
+export default function Properties({ globalSearch, setGlobalSearch }) {
   // Toggle states
   const [viewMode, setViewMode] = useState('list'); // 'list' or 'map'
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -328,8 +328,6 @@ export default function Properties({ globalSearch, setGlobalSearch, favorites, o
                     key={prop.id}
                     property={prop}
                     onSelect={setSelectedProperty}
-                    isFavorite={favorites.includes(prop.id)}
-                    onToggleFavorite={onToggleFavorite}
                   />
                 ))}
               </div>
@@ -353,8 +351,6 @@ export default function Properties({ globalSearch, setGlobalSearch, favorites, o
         <PropertyModal
           property={selectedProperty}
           onClose={() => setSelectedProperty(null)}
-          isFavorite={favorites.includes(selectedProperty.id)}
-          onToggleFavorite={onToggleFavorite}
         />
       )}
 

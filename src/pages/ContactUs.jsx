@@ -220,9 +220,38 @@ export default function ContactUs() {
         }
 
         .contact-header {
-          background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-dark) 100%);
-          padding: 5rem 0;
+          position: relative;
+          background-image: url('/images/villa_property.png');
+          background-size: cover;
+          background-position: center;
+          padding: 7rem 0 6rem 0;
           color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .contact-header::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95));
+          z-index: 1;
+        }
+
+        .contact-header .container {
+          position: relative !important;
+          z-index: 10 !important;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        @media (max-width: 768px) {
+          .contact-header {
+            padding: 4.5rem 1rem 3.5rem 1rem;
+          }
         }
 
         .contact-header-desc {
